@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>ARJUNA - Parent App</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            arjuna: {
+              purple: '#6B46C1',
+              primary: '#5B32A3',
+              lightPurple: '#F3EEFB',
+              softPink: '#FEECEC',
+              pinkText: '#E53E3E',
+              softGreen: '#EBF8F2',
+              greenText: '#38A169',
+              dark: '#1F2937',
+              muted: '#6B7280',
+              bgLight: '#F8FAFC'
+            }
+          },
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-layout">
+    /* iOS frame setup and smooth scrolling */
+    body {
+      background-color: #F1F4F9;
+      -webkit-font-smoothing: antialiased;
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="flex justify-center items-center min-h-screen p-0 sm:p-4 text-gray-800 antialiased font-sans">
+<!-- BEGIN: PhoneShellContainer -->
+<!-- Mimics the native iOS Mobile Device Screen -->
+<div class="w-full max-w-[390px] h-[844px] bg-[#F8FAFC] shadow-2xl rounded-[44px] border-[6px] border-white overflow-hidden flex flex-col relative">
+<!-- BEGIN: iOSStatusBar -->
+<!-- iOS Notch / Status Bar -->
+<div class="w-full pt-3 px-7 pb-1 flex justify-between items-center text-xs font-semibold text-gray-900 z-30 shrink-0 select-none">
+<span>9:41</span>
+<!-- Dynamic Island / Speaker Pill indicator placeholder -->
+<div class="w-24 h-4 bg-transparent"></div>
+<div class="flex items-center space-x-1.5">
+<!-- Cellular Signal -->
+<svg class="w-3.5 h-3.5" fill="currentColor" viewbox="0 0 16 16">
+<path d="M1 11.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-3zm4-3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-6zm4-3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-9zm4-3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-12z"></path>
+</svg>
+<!-- Wi-Fi -->
+<svg class="w-3.5 h-3.5" fill="currentColor" viewbox="0 0 16 16">
+<path d="M15.384 6.115a.485.485 0 0 0-.047-.736A12.444 12.444 0 0 0 8 3C5.259 3 2.723 3.882.663 5.379a.485.485 0 0 0-.048.736.518.518 0 0 0 .668.05A11.448 11.448 0 0 1 8 4c2.507 0 4.827.802 6.716 2.164.205.148.49.13.668-.049z"></path>
+<path d="M13.229 8.271a.482.482 0 0 0-.063-.745A9.455 9.455 0 0 0 8 6c-1.905 0-3.68.56-5.166 1.526a.48.48 0 0 0-.063.745.525.525 0 0 0 .652.065A8.46 8.46 0 0 1 8 7a8.46 8.46 0 0 1 4.577 1.336c.205.145.48.125.652-.065zm-2.183 2.183a.482.482 0 0 0-.077-.753A6.471 6.471 0 0 0 8 9a6.471 6.471 0 0 0-2.969.699.482.482 0 0 0-.078.755.522.522 0 0 0 .626.082A5.474 5.474 0 0 1 8 10c1.025 0 1.983.28 2.822.766a.522.522 0 0 0 .624-.082zM8 12a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path>
+</svg>
+<!-- Battery Icon -->
+<div class="w-5 h-2.5 border border-black rounded-[3px] p-0.5 flex items-center">
+<div class="w-full h-full bg-black rounded-[1px]"></div>
+</div>
+</div>
+</div>
+<!-- END: iOSStatusBar -->
+<!-- BEGIN: TopHeader -->
+<!-- Arjuna App Header with Branding and Parent Avatar -->
+<header class="px-5 pt-2 pb-3 flex items-center justify-between bg-transparent z-20 shrink-0">
+<!-- Hamburger Menu Button -->
+<button aria-label="Menu" class="p-1 -ml-1 text-gray-800 hover:opacity-75 focus:outline-none" type="button">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24">
+<line x1="3" x2="21" y1="6" y2="6"></line>
+<line x1="3" x2="21" y1="12" y2="12"></line>
+<line x1="3" x2="21" y1="18" y2="18"></line>
+</svg>
+</button>
+<!-- Center Logo & Subtitle -->
+<div class="flex flex-col items-center text-center">
+<h1 class="text-[17px] font-extrabold tracking-wider text-[#6B46C1] leading-tight">ARJUNA</h1>
+<p class="text-[7.5px] font-medium text-gray-500 tracking-tight">Adaptive Reasoning &amp; Journey-based</p>
+<p class="text-[7.5px] font-medium text-gray-500 tracking-tight -mt-0.5">Unified Neural Assistant</p>
+</div>
+<!-- Right Header Actions: Bell Notification & Parent Avatar -->
+<div class="flex items-center space-x-2.5">
+<button aria-label="Notifications" class="text-gray-700 hover:text-gray-900 focus:outline-none relative" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+<path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+</svg>
+<span class="absolute 0 top-0 right-0 w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+</button>
+<!-- Female Parent Profile Picture -->
+<div class="w-8 h-8 rounded-full overflow-hidden border border-purple-200 bg-purple-50 flex items-center justify-center">
+<img alt="Mrs. Verma" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9njTjmpk7y0MGucFyYkdwcfz_Q5tcuZyPLdLdK8hcwFJ2_3fVJO3HUkUDmJev7aSPsqeTk94QDkEA78fzBatDRb3tkQ4ukjPF5iH4MUGVZjU1um7cRMIXRTZ0wEa35i943UFICyNCTlP89ASzlQt1xlyPvU67S5FXEFxsN1wTV9LbusvEdFSk1oW707HsN8zDLNF9Zi19dh_pz4tQB2Y__OrMRacew521pOawXjoJuyMfvXuOGY4usw"/>
+</div>
+</div>
+</header>
+<!-- END: TopHeader -->
+<!-- Scrollable Content Area -->
+<main class="flex-1 overflow-y-auto px-5 pb-20 hide-scrollbar space-y-4">
+<!-- BEGIN: GreetingSection -->
+<section class="pt-1" data-purpose="greeting">
+<h2 class="text-xl font-bold text-gray-900 flex items-center">
+          Hello, Mrs. Verma! <span class="ml-1 text-lg">👋</span>
+</h2>
+<p class="text-xs text-gray-500 mt-0.5">Here's Rohan's progress overview.</p>
+</section>
+<!-- END: GreetingSection -->
+<!-- BEGIN: StudentSelectorCard -->
+<!-- Card displaying current selected child/student -->
+<section class="bg-white rounded-2xl p-3 shadow-[0_2px_10px_rgba(0,0,0,0.03)] border border-gray-100 flex items-center justify-between" data-purpose="student-selector">
+<div class="flex items-center space-x-3">
+<!-- Student Avatar -->
+<div class="w-11 h-11 rounded-full overflow-hidden bg-emerald-50 border border-emerald-100 flex items-center justify-center shrink-0">
+<img alt="Rohan Verma Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABUKv36hEaTVckqJnWR-SZ-rpxJvNL-cIBl_0yud2QPPoS69Z1ctWTcJ082xgYSF7qzj7_SJ0P8s2v3hbBFqkgsI3OA0F7L7pZXtpHPzo2dUDthXM2WB_27dN0xAsGHy9e46kxxY-QZDORSVJiTVCMvxAeFX0XLIOJJ60muAACLnGwiOt5oDFdmT559YvOkqhGqCSI04S60Hi2ie1h9oqzEK6TmNwOOXpBNpbOQySIYMefnNlea0u6AQ"/>
+</div>
+<!-- Student Details -->
+<div>
+<h3 class="text-sm font-bold text-gray-900 leading-tight">Rohan Verma</h3>
+<p class="text-[11px] font-medium text-gray-500 leading-tight mt-0.5">Class 12 - Science</p>
+</div>
+</div>
+<!-- Dropdown chevron button -->
+<button aria-label="Select student" class="text-gray-500 p-1 hover:text-gray-800 focus:outline-none" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24">
+<polyline points="6 9 12 15 18 9"></polyline>
+</svg>
+</button>
+</section>
+<!-- END: StudentSelectorCard -->
+<!-- BEGIN: OverallProgressCard -->
+<!-- Radial gauge combined with monthly statistics metrics -->
+<section class="bg-white rounded-2xl p-4 shadow-[0_2px_10px_rgba(0,0,0,0.03)] border border-gray-100" data-purpose="overall-progress">
+<h3 class="text-sm font-bold text-gray-900 mb-3">Overall Progress</h3>
+<div class="flex items-center justify-between">
+<!-- Radial Progress Gauge (78%) -->
+<div class="relative flex items-center justify-center w-[110px] h-[110px] shrink-0">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<!-- Background Gray Ring -->
+<path class="text-gray-100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<!-- Foreground Purple Radial Ring -->
+<path class="text-[#6B46C1]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="78, 100" stroke-linecap="round" stroke-width="3.2"></path>
+</svg>
+<!-- Progress Label Inside Gauge -->
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="text-xl font-extrabold text-gray-900 leading-none">78%</span>
+<span class="text-[9px] font-medium text-gray-500 mt-1 leading-none">Good Progress</span>
+</div>
+</div>
+<!-- Key Metrics List -->
+<div class="flex-1 ml-5 space-y-2.5 text-xs">
+<!-- Tests This Month -->
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-1.5 text-gray-600">
+<span class="p-1 rounded bg-purple-50 text-[#6B46C1]">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect>
+<line x1="16" x2="16" y1="2" y2="6"></line>
+<line x1="8" x2="8" y1="2" y2="6"></line>
+<line x1="3" x2="21" y1="10" y2="10"></line>
+</svg>
+</span>
+<span class="text-[11px] font-medium text-gray-600">Tests This Month</span>
+</div>
+<span class="font-bold text-gray-900 text-xs">6</span>
+</div>
+<!-- Average Score -->
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-1.5 text-gray-600">
+<span class="p-1 rounded bg-emerald-50 text-emerald-600">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<circle cx="12" cy="12" r="6"></circle>
+<circle cx="12" cy="12" r="2"></circle>
+</svg>
+</span>
+<span class="text-[11px] font-medium text-gray-600">Average Score</span>
+</div>
+<span class="font-bold text-gray-900 text-xs">78%</span>
+</div>
+<!-- Study Time (Avg.) -->
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-1.5 text-gray-600">
+<span class="p-1 rounded bg-blue-50 text-blue-500">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+</span>
+<span class="text-[11px] font-medium text-gray-600">Study Time (Avg.)</span>
+</div>
+<span class="font-bold text-gray-900 text-xs">2h 10m</span>
+</div>
+<!-- Current Streak -->
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-1.5 text-gray-600">
+<span class="p-1 rounded bg-orange-50 text-orange-500">
+<svg class="w-3.5 h-3.5" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12.44 2.22a.75.75 0 0 0-.88 0C10.19 3.23 6 6.8 6 12.5a6 6 0 0 0 12 0c0-5.7-4.19-9.27-5.56-10.28ZM12 20a4 4 0 0 1-4-4c0-3.32 2.22-6.14 4-7.53 1.78 1.39 4 4.21 4 7.53a4 4 0 0 1-4 4Z"></path>
+</svg>
+</span>
+<span class="text-[11px] font-medium text-gray-600">Current Streak</span>
+</div>
+<span class="font-bold text-gray-900 text-xs">7 Days</span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: OverallProgressCard -->
+<!-- BEGIN: SubjectPerformanceSection -->
+<!-- List of Subjects with Scores and Status Pills -->
+<section class="space-y-2.5" data-purpose="subject-performance">
+<div class="flex justify-between items-center px-0.5">
+<h3 class="text-sm font-bold text-gray-900">Subject Performance</h3>
+<a class="text-xs font-semibold text-[#6B46C1] hover:underline" href="#">View All</a>
+</div>
+<div class="bg-white rounded-2xl p-3.5 shadow-[0_2px_10px_rgba(0,0,0,0.03)] border border-gray-100 space-y-3.5">
+<!-- Physics Row -->
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2.5">
+<div class="w-8 h-8 rounded-full bg-[#805AD5] text-white flex items-center justify-center shadow-sm">
+<!-- Atom / Flower Icon -->
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="3"></circle>
+<ellipse cx="12" cy="12" rx="7" ry="3" transform="rotate(30 12 12)"></ellipse>
+<ellipse cx="12" cy="12" rx="7" ry="3" transform="rotate(-30 12 12)"></ellipse>
+</svg>
+</div>
+<span class="text-xs font-semibold text-gray-800">Physics</span>
+</div>
+<div class="flex items-center space-x-4">
+<span class="text-xs font-bold text-gray-900">64%</span>
+<span class="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-[#FDE8E8] text-[#E53E3E] min-w-[76px] text-center">
+                Needs Focus
+              </span>
+</div>
+</div>
+<!-- Chemistry Row -->
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2.5">
+<div class="w-8 h-8 rounded-full bg-[#805AD5] text-white flex items-center justify-center shadow-sm">
+<!-- Beaker / Flask Icon -->
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M10 2v7.31L4.19 19a1.5 1.5 0 0 0 1.28 2.23h13.06a1.5 1.5 0 0 0 1.28-2.23L14 9.31V2"></path>
+<line x1="8.5" x2="15.5" y1="2" y2="2"></line>
+</svg>
+</div>
+<span class="text-xs font-semibold text-gray-800">Chemistry</span>
+</div>
+<div class="flex items-center space-x-4">
+<span class="text-xs font-bold text-gray-900">81%</span>
+<span class="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-[#E8F8EE] text-[#38A169] min-w-[76px] text-center">
+                Good
+              </span>
+</div>
+</div>
+<!-- Mathematics Row -->
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2.5">
+<div class="w-8 h-8 rounded-full bg-[#805AD5] text-white flex items-center justify-center shadow-sm">
+<!-- Grid / Math Icon -->
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<rect height="7" width="7" x="3" y="3"></rect>
+<rect height="7" width="7" x="14" y="3"></rect>
+<rect height="7" width="7" x="14" y="14"></rect>
+<rect height="7" width="7" x="3" y="14"></rect>
+</svg>
+</div>
+<span class="text-xs font-semibold text-gray-800">Mathematics</span>
+</div>
+<div class="flex items-center space-x-4">
+<span class="text-xs font-bold text-gray-900">89%</span>
+<span class="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-[#E8F8EE] text-[#38A169] min-w-[76px] text-center">
+                Strong
+              </span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: SubjectPerformanceSection -->
+<!-- BEGIN: TeachersFeedbackCard -->
+<!-- Teacher's Quote & Direct Observations -->
+<section class="space-y-2" data-purpose="teacher-feedback">
+<h3 class="text-sm font-bold text-gray-900 px-0.5">Teacher's Feedback</h3>
+<div class="bg-white rounded-2xl p-4 shadow-[0_2px_10px_rgba(0,0,0,0.03)] border border-gray-100 relative">
+<div class="flex space-x-3">
+<!-- Decorative Quote Mark -->
+<span class="text-3xl font-serif text-[#C4B5FD] leading-none select-none -mt-1 font-bold">“</span>
+<div class="space-y-2 flex-1">
+<p class="text-xs text-gray-700 leading-relaxed font-normal">
+                Rohan is understanding concepts well but needs to work on numerical practice. Keep encouraging him!
+              </p>
+<p class="text-xs font-medium text-[#6B46C1] pt-0.5">
+                - Mr. Sharma
+              </p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: TeachersFeedbackCard -->
+</main>
+<!-- BEGIN: BottomNavigation -->
+<!-- Native-style iOS bottom tab bar -->
+<nav class="absolute bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-gray-100 py-2.5 px-6 flex justify-between items-center z-30">
+<!-- Dashboard (Active) -->
+<a class="flex flex-col items-center text-[#6B46C1] group" href="#dashboard">
+<div class="w-5 h-5 flex items-center justify-center">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20">
+<path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+</svg>
+</div>
+<span class="text-[10px] font-semibold mt-1">Dashboard</span>
+</a>
+<!-- Progress -->
+<a class="flex flex-col items-center text-gray-400 hover:text-gray-600" href="#progress">
+<div class="w-5 h-5 flex items-center justify-center">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<line x1="18" x2="18" y1="20" y2="10"></line>
+<line x1="12" x2="12" y1="20" y2="4"></line>
+<line x1="6" x2="6" y1="20" y2="14"></line>
+</svg>
+</div>
+<span class="text-[10px] font-medium mt-1">Progress</span>
+</a>
+<!-- Reports -->
+<a class="flex flex-col items-center text-gray-400 hover:text-gray-600" href="#reports">
+<div class="w-5 h-5 flex items-center justify-center">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+<polyline points="14 2 14 8 20 8"></polyline>
+<line x1="16" x2="8" y1="13" y2="13"></line>
+<line x1="16" x2="8" y1="17" y2="17"></line>
+<polyline points="10 9 9 9 8 9"></polyline>
+</svg>
+</div>
+<span class="text-[10px] font-medium mt-1">Reports</span>
+</a>
+<!-- Notifications -->
+<a class="flex flex-col items-center text-gray-400 hover:text-gray-600" href="#notifications">
+<div class="w-5 h-5 flex items-center justify-center">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+<path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+</svg>
+</div>
+<span class="text-[10px] font-medium mt-1">Notifications</span>
+</a>
+<!-- More -->
+<a class="flex flex-col items-center text-gray-400 hover:text-gray-600" href="#more">
+<div class="w-5 h-5 flex items-center justify-center">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+<circle cx="5" cy="12" r="2"></circle>
+<circle cx="12" cy="12" r="2"></circle>
+<circle cx="19" cy="12" r="2"></circle>
+</svg>
+</div>
+<span class="text-[10px] font-medium mt-1">More</span>
+</a>
+</nav>
+<!-- END: BottomNavigation -->
+<!-- iOS Home Indicator Bar -->
+<div class="absolute bottom-1 inset-x-0 flex justify-center pointer-events-none z-40">
+<div class="w-32 h-1 bg-gray-300 rounded-full"></div>
+</div>
+</div>
+<!-- END: PhoneShellContainer -->
+</body></html>
