@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>ARJUNA Teacher App</title>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'app-bg': '#f6f8fa',
+            'arjuna-green': '#1ea759',
+            'stat-green': '#24a159',
+            'alert-red': '#e75353',
+            'alert-orange': '#f28c28',
+            'alert-amber': '#f59e0b'
+          },
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-scroll-and-reset">
+    /* Remove default webkit tap highlights and ensure iOS app look */
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #eef2f6;
+    }
+    /* Hide scrollbars for clean presentation */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-0 md:p-6 text-slate-800 antialiased font-sans">
+<!-- BEGIN: PhoneContainer -->
+<!-- Container replicating the iOS mobile frame -->
+<div class="w-full max-w-[400px] min-h-[850px] bg-[#fafbfc] rounded-[42px] shadow-2xl overflow-hidden border-[6px] border-slate-900/10 flex flex-col relative">
+<!-- BEGIN: iOSStatusBar -->
+<!-- iOS Status Bar with Time, Dynamic Notch/Speaker & Status Icons -->
+<header class="pt-3 px-7 pb-1 flex justify-between items-center text-xs font-semibold text-slate-900 select-none">
+<span class="tracking-tight text-[13px] font-semibold">9:41</span>
+<div class="flex items-center space-x-1.5 text-slate-900">
+<!-- Cellular Signal Bars -->
+<svg class="w-4 h-3.5 fill-current" viewbox="0 0 24 24">
+<rect height="6" rx="1" width="3" x="2" y="15"></rect>
+<rect height="10" rx="1" width="3" x="7" y="11"></rect>
+<rect height="14" rx="1" width="3" x="12" y="7"></rect>
+<rect height="18" rx="1" width="3" x="17" y="3"></rect>
+</svg>
+<!-- Wi-Fi Icon -->
+<svg class="w-3.5 h-3.5 fill-current" viewbox="0 0 24 24">
+<path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0012 4zm0 4c3.48 0 6.64 1.35 9 3.55L12 19.4 3 11.55C5.36 9.35 8.52 8 12 8z"></path>
+</svg>
+<!-- Battery Icon -->
+<div class="w-5 h-2.5 border border-current rounded-[3px] p-0.5 flex items-center">
+<div class="h-full w-3/4 bg-current rounded-[1px]"></div>
+</div>
+</div>
+</header>
+<!-- END: iOSStatusBar -->
+<!-- BEGIN: TopAppHeader -->
+<!-- App Navigation Header with ARJUNA Logo and Teacher Avatar -->
+<div class="px-5 pt-2 pb-2 flex items-center justify-between" data-purpose="top-navigation">
+<!-- Hamburger Menu Button -->
+<button aria-label="Menu" class="p-1.5 -ml-1 text-slate-700 hover:text-slate-900 focus:outline-none" type="button">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24">
+<line x1="4" x2="20" y1="7" y2="7"></line>
+<line x1="4" x2="20" y1="12" y2="12"></line>
+<line x1="4" x2="20" y1="17" y2="17"></line>
+</svg>
+</button>
+<!-- Center Logo & Subtitle -->
+<div class="text-center">
+<h1 class="text-lg font-extrabold tracking-wide text-arjuna-green leading-none">ARJUNA</h1>
+<p class="text-[7px] text-slate-500 font-medium tracking-tight mt-0.5 max-w-[160px] leading-tight">
+          Adaptive Reasoning &amp; Journey-based Unified Neural Assistant
+        </p>
+</div>
+<!-- Right Action Icons: Notification Bell & Profile Avatar -->
+<div class="flex items-center space-x-2.5">
+<button aria-label="Notifications" class="text-slate-600 hover:text-slate-900 relative" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+<path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+</svg>
+</button>
+<!-- Teacher Avatar (Glasses, Suit, Tie) -->
+<div class="w-8 h-8 rounded-full ring-1 ring-slate-200 overflow-hidden bg-amber-50 flex items-center justify-center flex-shrink-0">
+<svg class="w-8 h-8" fill="none" viewbox="0 0 64 64">
+<!-- Background Skin/Neck -->
+<rect fill="#e0f2fe" height="64" width="64"></rect>
+<!-- Head & Face -->
+<path d="M32 12c-7.5 0-13.5 5.5-13.5 13.5 0 6 3.5 11 9 12.8v3.7h9v-3.7c5.5-1.8 9-6.8 9-12.8 0-8-6-13.5-13.5-13.5z" fill="#fcd3b6"></path>
+<!-- Short Black Hair -->
+<path d="M18.5 22c0-8.5 6-13 13.5-13s13.5 4.5 13.5 13c-2-3-5.5-5-10-5-4 0-7 2-9 4-3 0-6.5-1.5-8 1z" fill="#1e293b"></path>
+<!-- Spectacles / Glasses -->
+<rect fill="rgba(255,255,255,0.4)" height="6" rx="2" stroke="#0f172a" stroke-width="1.8" width="8" x="22" y="22"></rect>
+<rect fill="rgba(255,255,255,0.4)" height="6" rx="2" stroke="#0f172a" stroke-width="1.8" width="8" x="34" y="22"></rect>
+<line stroke="#0f172a" stroke-width="1.8" x1="30" x2="34" y1="25" y2="25"></line>
+<!-- Smile -->
+<path d="M29 32c1.5 1.5 4.5 1.5 6 0" stroke="#b45309" stroke-linecap="round" stroke-width="1.2"></path>
+<!-- Blue Suit Jacket & White Collar -->
+<path d="M14 64v-9c0-6 7-9 18-9s18 3 18 9v9H14z" fill="#1e3a8a"></path>
+<!-- Shirt Collar Triangle -->
+<polygon fill="#ffffff" points="32,46 25,56 39,56"></polygon>
+<!-- Orange / Maroon Tie -->
+<polygon fill="#ea580c" points="32,49 34,51 33.5,63 30.5,63 30,51"></polygon>
+</svg>
+</div>
+</div>
+</div>
+<!-- END: TopAppHeader -->
+<!-- BEGIN: MainContentScrollableArea -->
+<main class="flex-1 overflow-y-auto px-4 pt-2 pb-5 space-y-4">
+<!-- BEGIN: WelcomeGreeting -->
+<!-- Welcome message personalized to the teacher -->
+<section class="px-1" data-purpose="teacher-greeting">
+<h2 class="text-base font-bold text-slate-800 tracking-tight flex items-center">
+          Welcome, Mr. Sharma! <span class="ml-1 text-sm">👋</span>
+</h2>
+<p class="text-[11px] text-slate-500 font-normal mt-0.5">
+          Here's what's happening in your class today.
+        </p>
+</section>
+<!-- END: WelcomeGreeting -->
+<!-- BEGIN: StatMetricCards -->
+<!-- 3 Key Metric Summary Cards -->
+<section class="grid grid-cols-3 gap-2.5" data-purpose="stat-metrics">
+<!-- Metric 1: Total Students -->
+<article class="bg-white rounded-xl p-2.5 border border-slate-100 shadow-[0_2px_8px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+<span class="text-[9px] font-medium text-slate-500 tracking-tight">Total Students</span>
+<span class="text-xl font-bold text-stat-green leading-tight my-0.5">45</span>
+<span class="text-[8.5px] text-slate-400">In Your Class</span>
+</article>
+<!-- Metric 2: Avg. Test Score -->
+<article class="bg-white rounded-xl p-2.5 border border-slate-100 shadow-[0_2px_8px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+<span class="text-[9px] font-medium text-slate-500 tracking-tight">Avg. Test Score</span>
+<span class="text-xl font-bold text-stat-green leading-tight my-0.5">72%</span>
+<span class="text-[8.5px] text-slate-400">This Month</span>
+</article>
+<!-- Metric 3: Tests Conducted -->
+<article class="bg-white rounded-xl p-2.5 border border-slate-100 shadow-[0_2px_8px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+<span class="text-[9px] font-medium text-slate-500 tracking-tight">Tests Conducted</span>
+<span class="text-xl font-bold text-stat-green leading-tight my-0.5">8</span>
+<span class="text-[8.5px] text-slate-400">This Month</span>
+</article>
+</section>
+<!-- END: StatMetricCards -->
+<!-- BEGIN: ClassPerformanceOverview -->
+<!-- Card showing class selector and topic performance bars -->
+<section class="bg-white rounded-2xl p-3.5 border border-slate-100 shadow-[0_2px_10px_rgba(0,0,0,0.03)]" data-purpose="class-performance-overview">
+<!-- Header with Title & View All -->
+<div class="flex items-center justify-between mb-3">
+<h3 class="text-xs font-bold text-slate-800 tracking-tight">Class Performance Overview</h3>
+<a class="text-[10.5px] font-semibold text-arjuna-green hover:underline" href="#">View All</a>
+</div>
+<!-- Class Dropdown Selector -->
+<div class="relative mb-3.5">
+<button class="w-full bg-slate-50 border border-slate-200/80 rounded-full py-1.5 px-3.5 flex items-center justify-between text-[11px] font-medium text-slate-700 hover:bg-slate-100/70 transition-colors" type="button">
+<span>Class 12 - Physics</span>
+<svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+<!-- Topic Wise Performance List -->
+<div>
+<h4 class="text-[10px] font-semibold text-slate-700 mb-2.5">Topic Wise Performance</h4>
+<div class="space-y-2.5">
+<!-- Topic 1: Mechanics -->
+<div class="flex items-center text-[10px]">
+<span class="w-36 text-slate-600 truncate">Mechanics</span>
+<div class="flex-1 mx-2 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-arjuna-green h-full rounded-full" style="width: 76%"></div>
+</div>
+<span class="w-7 text-right font-medium text-slate-600">76%</span>
+</div>
+<!-- Topic 2: Current Electricity -->
+<div class="flex items-center text-[10px]">
+<span class="w-36 text-slate-600 truncate">Current Electricity</span>
+<div class="flex-1 mx-2 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-alert-red h-full rounded-full" style="width: 58%"></div>
+</div>
+<span class="w-7 text-right font-medium text-slate-600">58%</span>
+</div>
+<!-- Topic 3: Magnetism -->
+<div class="flex items-center text-[10px]">
+<span class="w-36 text-slate-600 truncate">Magnetism</span>
+<div class="flex-1 mx-2 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-alert-orange h-full rounded-full" style="width: 71%"></div>
+</div>
+<span class="w-7 text-right font-medium text-slate-600">71%</span>
+</div>
+<!-- Topic 4: Electromagnetic Induction -->
+<div class="flex items-center text-[10px]">
+<span class="w-36 text-slate-600 truncate">Electromagnetic Induction</span>
+<div class="flex-1 mx-2 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-alert-amber h-full rounded-full" style="width: 66%"></div>
+</div>
+<span class="w-7 text-right font-medium text-slate-600">66%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: ClassPerformanceOverview -->
+<!-- BEGIN: QuickActionButtons -->
+<!-- 4 Quick Actions Row: Create Test, Assignments, Enter Marks, Reports -->
+<section class="grid grid-cols-4 gap-2" data-purpose="quick-actions">
+<!-- Action 1: Create Test -->
+<button class="bg-white rounded-xl p-2 py-2.5 flex flex-col items-center justify-center border border-slate-100 shadow-sm hover:shadow transition" type="button">
+<div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-500 flex items-center justify-center mb-1">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+<path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+</svg>
+</div>
+<span class="text-[9px] font-medium text-slate-700 tracking-tight leading-tight">Create Test</span>
+</button>
+<!-- Action 2: Assignments -->
+<button class="bg-white rounded-xl p-2 py-2.5 flex flex-col items-center justify-center border border-slate-100 shadow-sm hover:shadow transition" type="button">
+<div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center mb-1">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+<polyline points="14 2 14 8 20 8"></polyline>
+<line x1="16" x2="8" y1="13" y2="13"></line>
+<line x1="16" x2="8" y1="17" y2="17"></line>
+<line x1="10" x2="8" y1="9" y2="9"></line>
+</svg>
+</div>
+<span class="text-[9px] font-medium text-slate-700 tracking-tight leading-tight">Assignments</span>
+</button>
+<!-- Action 3: Enter Marks -->
+<button class="bg-white rounded-xl p-2 py-2.5 flex flex-col items-center justify-center border border-slate-100 shadow-sm hover:shadow transition" type="button">
+<div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center mb-1">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M9 11l3 3L22 4"></path>
+<path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+</svg>
+</div>
+<span class="text-[9px] font-medium text-slate-700 tracking-tight leading-tight">Enter Marks</span>
+</button>
+<!-- Action 4: Reports -->
+<button class="bg-white rounded-xl p-2 py-2.5 flex flex-col items-center justify-center border border-slate-100 shadow-sm hover:shadow transition" type="button">
+<div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-500 flex items-center justify-center mb-1">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<rect height="14" rx="2" ry="2" width="20" x="2" y="3"></rect>
+<line x1="8" x2="16" y1="21" y2="21"></line>
+<line x1="12" x2="12" y1="17" y2="21"></line>
+<line x1="7" x2="7" y1="10" y2="12"></line>
+<line x1="12" x2="12" y1="7" y2="12"></line>
+<line x1="17" x2="17" y1="9" y2="12"></line>
+</svg>
+</div>
+<span class="text-[9px] font-medium text-slate-700 tracking-tight leading-tight">Reports</span>
+</button>
+</section>
+<!-- END: QuickActionButtons -->
+<!-- BEGIN: RecentStudentActivity -->
+<!-- Feed of individual students' recent performance updates -->
+<section class="bg-white rounded-2xl p-3.5 border border-slate-100 shadow-[0_2px_10px_rgba(0,0,0,0.03)]" data-purpose="recent-student-activity">
+<div class="flex items-center justify-between mb-2.5">
+<h3 class="text-xs font-bold text-slate-800 tracking-tight">Recent Student Activity</h3>
+<a class="text-[10.5px] font-semibold text-arjuna-green hover:underline" href="#">View All</a>
+</div>
+<div class="divide-y divide-slate-100">
+<!-- Student 1: Rohan Verma -->
+<div class="py-2 flex items-center justify-between">
+<div class="flex items-center space-x-2.5">
+<!-- Avatar Rohan -->
+<div class="w-7 h-7 rounded-full bg-emerald-100 overflow-hidden flex-shrink-0">
+<svg class="w-full h-full" fill="none" viewbox="0 0 36 36">
+<rect fill="#d1fae5" height="36" width="36"></rect>
+<circle cx="18" cy="14" fill="#fcd34d" r="7"></circle>
+<path d="M12 11c0-4 3-6 6-6s6 2 6 6" fill="#1f2937"></path>
+<path d="M8 32c0-5 4-8 10-8s10 3 10 8H8z" fill="#047857"></path>
+</svg>
+</div>
+<div>
+<p class="text-[11px] font-semibold text-slate-800 leading-none">Rohan Verma</p>
+<p class="text-[9.5px] text-slate-400 mt-0.5 leading-none">Scored 18/20 in Current Electricity Test</p>
+</div>
+</div>
+<span class="text-[9px] text-slate-400 font-normal">Today</span>
+</div>
+<!-- Student 2: Ananya Singh -->
+<div class="py-2 flex items-center justify-between">
+<div class="flex items-center space-x-2.5">
+<!-- Avatar Ananya -->
+<div class="w-7 h-7 rounded-full bg-rose-100 overflow-hidden flex-shrink-0">
+<svg class="w-full h-full" fill="none" viewbox="0 0 36 36">
+<rect fill="#ffe4e6" height="36" width="36"></rect>
+<circle cx="18" cy="14" fill="#fed7aa" r="7"></circle>
+<path d="M11 12c0-4.5 3-7.5 7-7.5s7 3 7 7.5c-1 3-3 6-7 6s-6-3-7-6z" fill="#312e81"></path>
+<path d="M8 32c0-5 4-8 10-8s10 3 10 8H8z" fill="#e11d48"></path>
+</svg>
+</div>
+<div>
+<p class="text-[11px] font-semibold text-slate-800 leading-none">Ananya Singh</p>
+<p class="text-[9.5px] text-slate-400 mt-0.5 leading-none">Needs improvement in Magnetism</p>
+</div>
+</div>
+<span class="text-[9px] text-slate-400 font-normal">Yesterday</span>
+</div>
+<!-- Student 3: Kunal Joshi -->
+<div class="py-2 flex items-center justify-between">
+<div class="flex items-center space-x-2.5">
+<!-- Avatar Kunal -->
+<div class="w-7 h-7 rounded-full bg-blue-100 overflow-hidden flex-shrink-0">
+<svg class="w-full h-full" fill="none" viewbox="0 0 36 36">
+<rect fill="#e0f2fe" height="36" width="36"></rect>
+<circle cx="18" cy="14" fill="#fed7aa" r="7"></circle>
+<path d="M12 11c0-4 3-6 6-6s6 2 6 6" fill="#374151"></path>
+<path d="M8 32c0-5 4-8 10-8s10 3 10 8H8z" fill="#2563eb"></path>
+</svg>
+</div>
+<div>
+<p class="text-[11px] font-semibold text-slate-800 leading-none">Kunal Joshi</p>
+<p class="text-[9.5px] text-slate-400 mt-0.5 leading-none">Completed 5 practice sets</p>
+</div>
+</div>
+<span class="text-[9px] text-slate-400 font-normal">Yesterday</span>
+</div>
+</div>
+</section>
+<!-- END: RecentStudentActivity -->
+</main>
+<!-- END: MainContentScrollableArea -->
+<!-- BEGIN: BottomNavigationBar -->
+<!-- Fixed bottom navigation bar for Teacher App -->
+<nav class="bg-white border-t border-slate-100 px-3 py-1.5 flex justify-around items-center select-none" data-purpose="bottom-navigation">
+<!-- Nav Item: Dashboard (Active) -->
+<a class="flex flex-col items-center justify-center text-arjuna-green py-0.5 px-2" href="#">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+<path d="M3 4a1 1 0 011-1h5a1 1 0 011 1v5a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 15a1 1 0 011-1h5a1 1 0 011 1v5a1 1 0 01-1 1H4a1 1 0 01-1-1v-5zM14 4a1 1 0 011-1h5a1 1 0 011 1v5a1 1 0 01-1 1h-5a1 1 0 01-1-1V4zM14 15a1 1 0 011-1h5a1 1 0 011 1v5a1 1 0 01-1 1h-5a1 1 0 01-1-1v-5z"></path>
+</svg>
+<span class="text-[8.5px] font-semibold mt-0.5">Dashboard</span>
+</a>
+<!-- Nav Item: Students -->
+<a class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 py-0.5 px-2" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="text-[8.5px] font-medium mt-0.5">Students</span>
+</a>
+<!-- Nav Item: Tests -->
+<a class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 py-0.5 px-2" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="text-[8.5px] font-medium mt-0.5">Tests</span>
+</a>
+<!-- Nav Item: Reports -->
+<a class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 py-0.5 px-2" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="text-[8.5px] font-medium mt-0.5">Reports</span>
+</a>
+<!-- Nav Item: More -->
+<a class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 py-0.5 px-2" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<circle cx="5" cy="12" fill="currentColor" r="1.5"></circle>
+<circle cx="12" cy="12" fill="currentColor" r="1.5"></circle>
+<circle cx="19" cy="12" fill="currentColor" r="1.5"></circle>
+</svg>
+<span class="text-[8.5px] font-medium mt-0.5">More</span>
+</a>
+</nav>
+<!-- END: BottomNavigationBar -->
+<!-- iOS Home Indicator bar -->
+<div class="w-full pb-2 pt-1 flex justify-center bg-white">
+<div class="w-28 h-1 bg-slate-300 rounded-full"></div>
+</div>
+</div>
+<!-- END: PhoneContainer -->
+</body></html>
