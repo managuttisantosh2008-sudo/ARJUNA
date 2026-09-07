@@ -352,4 +352,166 @@
 </p>
 </div>
 </div>
-<!-- ====================
+<!-- ================= OTP / VERIFICATION MODAL / CARD ================= -->
+<div class="hidden mt-4 p-4.5 bg-white border-2 border-blue-200 rounded-2xl shadow-lg animate-fade-in
+     relative z-30" id="otp-verification-card">
+  <div class="flex items-start justify-between mb-2.5">
+    <div class="flex items-center gap-2.5">
+      <div class="w-8 h-8 rounded-xl bg-blue-100 text-[#1E3A8A] flex items-center justify-center text-sm">
+        <i class="fa-solid fa-shield-keyhole fa-key"></i>
+      </div>
+      <div>
+        <h4 class="text-xs font-bold text-slate-800" id="otp-card-title">Verify your Mobile / Email</h4>
+        <p class="text-[10px] text-slate-500">Security code sent to <span class="font-semibold text-slate-700">+91 98*** **420</span></p>
+      </div>
+    </div>
+    <button class="text-slate-400 hover:text-slate-600 text-xs p-1" onclick="closeOtpView()">
+      <i class="fa-solid fa-xmark text-sm"></i>
+    </button>
+  </div>
+  <div class="py-2">
+    <!-- 6-digit OTP Inputs -->
+    <div class="flex justify-center gap-2 mb-3">
+      <input class="w-10 h-11 text-center font-bold text-base rounded-xl border border-slate-300 bg-slate-50 focus:border-[#1E3A8A] focus:bg-white focus:outline-none" maxlength="1" type="text" value="7"/>
+      <input class="w-10 h-11 text-center font-bold text-base rounded-xl border border-slate-300 bg-slate-50 focus:border-[#1E3A8A] focus:bg-white focus:outline-none" maxlength="1" type="text" value="3"/>
+      <input class="w-10 h-11 text-center font-bold text-base rounded-xl border border-slate-300 bg-slate-50 focus:border-[#1E3A8A] focus:bg-white focus:outline-none" maxlength="1" type="text" value="9"/>
+      <input class="w-10 h-11 text-center font-bold text-base rounded-xl border border-slate-300 bg-slate-50 focus:border-[#1E3A8A] focus:bg-white focus:outline-none" maxlength="1" type="text" value="2"/>
+      <input class="w-10 h-11 text-center font-bold text-base rounded-xl border border-[#1E3A8A] bg-blue-50/50 text-[#1E3A8A] focus:outline-none ring-1 ring-[#1E3A8A]" maxlength="1" placeholder="-" type="text" value=""/>
+      <input class="w-10 h-11 text-center font-bold text-base rounded-xl border border-slate-300 bg-slate-50 focus:border-[#1E3A8A] focus:bg-white focus:outline-none" maxlength="1" placeholder="-" type="text" value=""/>
+    </div>
+    <div class="flex justify-between items-center text-[11px] text-slate-500 mb-3 px-1">
+      <span>Resend OTP in <strong class="text-slate-700">00:45</strong></span>
+      <button class="text-blue-700 font-semibold hover:underline" type="button">Resend via SMS</button>
+    </div>
+    <button class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow flex items-center justify-center gap-2 transition-all" onclick="completeOtpFlow()" type="button">
+      <i class="fa-solid fa-check"></i>
+      <span id="otp-verify-action-btn">Verify &amp; Proceed to Student Dashboard</span>
+    </button>
+  </div>
+</div>
+<!-- Trust Badges & Notice -->
+<div class="mt-auto pt-4 text-center">
+  <div class="inline-flex items-center justify-center gap-2 text-[10px] text-slate-400 mb-1">
+    <i class="fa-solid fa-lock text-[9px] text-emerald-600"></i>
+    <span>Protected by 256-bit institutional encryption</span>
+  </div>
+  <p class="text-[9px] text-slate-400">
+    ARJUNA Platform v2.4 • Certified for CBSE, ICSE &amp; State Boards
+  </p>
+</div>
+</div>
+<!-- iOS Home Indicator -->
+<div class="flex justify-center pt-2">
+  <div class="w-32 h-1 bg-slate-300 rounded-full"></div>
+</div>
+</div>
+<!-- Client-side Logic Script -->
+<script>
+  let activeRole = 'student';
+
+  function switchMode(mode) {
+    const tabLogin = document.getElementById('tab-login');
+    const tabSignup = document.getElementById('tab-signup');
+    const viewLogin = document.getElementById('view-login');
+    const viewSignup = document.getElementById('view-signup');
+    const otpCard = document.getElementById('otp-verification-card');
+
+    otpCard.classList.add('hidden');
+
+    if (mode === 'signup') {
+      tabSignup.className = "flex-1 py-2.5 text-xs font-bold rounded-xl transition-all duration-200 bg-white text-[#1E3A8A] shadow-sm";
+      tabLogin.className = "flex-1 py-2.5 text-xs font-semibold rounded-xl transition-all duration-200 text-slate-500 hover:text-slate-800";
+      viewLogin.classList.add('hidden');
+      viewSignup.classList.remove('hidden');
+    } else {
+      tabLogin.className = "flex-1 py-2.5 text-xs font-bold rounded-xl transition-all duration-200 bg-white text-[#1E3A8A] shadow-sm";
+      tabSignup.className = "flex-1 py-2.5 text-xs font-semibold rounded-xl transition-all duration-200 text-slate-500 hover:text-slate-800";
+      viewSignup.classList.add('hidden');
+      viewLogin.classList.remove('hidden');
+    }
+  }
+
+  function selectRole(role) {
+    activeRole = role;
+    const btnStudent = document.getElementById('role-btn-student');
+    const btnTeacher = document.getElementById('role-btn-teacher');
+    const btnParent = document.getElementById('role-btn-parent');
+
+    const studentFields = document.getElementById('dynamic-student-fields');
+    const teacherFields = document.getElementById('dynamic-teacher-fields');
+    const parentFields = document.getElementById('dynamic-parent-fields');
+    const signupBtn = document.getElementById('signup-btn-text');
+
+    // Reset styles
+    const defaultClass = "p-2.5 rounded-2xl border-2 border-slate-200 bg-white text-center transition-all hover:border-slate-300 flex flex-col items-center";
+    btnStudent.className = defaultClass;
+    btnTeacher.className = defaultClass;
+    btnParent.className = defaultClass;
+
+    // Hide all dynamic areas
+    studentFields.classList.add('hidden');
+    teacherFields.classList.add('hidden');
+    parentFields.classList.add('hidden');
+
+    if (role === 'student') {
+      btnStudent.className = "p-2.5 rounded-2xl border-2 border-[#1E3A8A] bg-blue-50/60 text-center transition-all shadow-xs flex flex-col items-center";
+      studentFields.classList.remove('hidden');
+      signupBtn.textContent = "Create Student Account";
+    } else if (role === 'teacher') {
+      btnTeacher.className = "p-2.5 rounded-2xl border-2 border-[#059669] bg-emerald-50/60 text-center transition-all shadow-xs flex flex-col items-center";
+      teacherFields.classList.remove('hidden');
+      signupBtn.textContent = "Create Teacher Account";
+    } else if (role === 'parent') {
+      btnParent.className = "p-2.5 rounded-2xl border-2 border-[#7C3AED] bg-purple-50/60 text-center transition-all shadow-xs flex flex-col items-center";
+      parentFields.classList.remove('hidden');
+      signupBtn.textContent = "Create Parent Account";
+    }
+  }
+
+  function togglePasswordVisibility(inputId, button) {
+    const input = document.getElementById(inputId);
+    const icon = button.querySelector('i');
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.className = 'fa-regular fa-eye-slash';
+    } else {
+      input.type = 'password';
+      icon.className = 'fa-regular fa-eye';
+    }
+  }
+
+  function openOtpView(role, title) {
+    const card = document.getElementById('otp-verification-card');
+    const cardTitle = document.getElementById('otp-card-title');
+    const actionBtn = document.getElementById('otp-verify-action-btn');
+
+    cardTitle.textContent = title || "Verify your Mobile / Email";
+
+    const roleName = role.charAt(0).toUpperCase() + role.slice(1);
+    actionBtn.textContent = `Verify & Proceed to ${roleName} Dashboard`;
+
+    card.classList.remove('hidden');
+    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function closeOtpView() {
+    const card = document.getElementById('otp-verification-card');
+    card.classList.add('hidden');
+  }
+
+  function triggerSignUpVerification() {
+    openOtpView(activeRole, `Verify ${activeRole.charAt(0).toUpperCase() + activeRole.slice(1)} Registration`);
+  }
+
+  function handleLoginSubmit() {
+    const idVal = document.getElementById('login-identifier').value;
+    alert(`Welcome back to ARJUNA! Authenticating: ${idVal}`);
+  }
+
+  function completeOtpFlow() {
+    const roleCapitalized = activeRole.charAt(0).toUpperCase() + activeRole.slice(1);
+    alert(`OTP Verified successfully! Redirecting to ${roleCapitalized} Dashboard...`);
+    closeOtpView();
+  }
+</script>
+</body></html>
