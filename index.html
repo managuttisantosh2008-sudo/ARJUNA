@@ -499,8 +499,31 @@
     card.classList.add('hidden');
   }
 
-  function triggerSignUpVerification() {
-    openOtpView(activeRole, `Verify ${activeRole.charAt(0).toUpperCase() + activeRole.slice(1)} Registration`);
+  async function triggerSignUpVerification() {
+  const email = document.getElementById('signup-email').value.trim();
+  const password = document.getElementById('signup-password').value;
+
+  if (!email || !password) {
+    alert('Please enter your email and password.');
+    return;
+  }
+
+  if (password.length < 8) {
+    alert('Password must be at least 8 characters.');
+    return;
+  }
+
+  const { data, error } = await supabaseClient.auth.signUp({
+    email: email,
+    password: password
+  });
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  alert('Account created! Please check your email to verify your account.');
   }
 
   function handleLoginSubmit() {
