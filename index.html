@@ -527,10 +527,29 @@
   alert('Account created! Please check your email to verify your account.');
   }
 
-  function handleLoginSubmit() {
-    const idVal = document.getElementById('login-identifier').value;
-    alert(`Welcome back to ARJUNA! Authenticating: ${idVal}`);
+  
+async function handleLoginSubmit() {
+  const idVal = document.getElementById('login-identifier').value.trim();
+  const password = document.getElementById('login-password').value;
+
+  if (!idVal || !password) {
+    alert('Please enter your email and password.');
+    return;
   }
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    email: idVal,
+    password: password
+  });
+
+  if (error) {
+    alert('Login failed: ' + error.message);
+    return;
+  }
+
+  alert('Login successful! Welcome to ARJUNA, ' + data.user.email);
+}
+    
 
   function completeOtpFlow() {
     const roleCapitalized = activeRole.charAt(0).toUpperCase() + activeRole.slice(1);
