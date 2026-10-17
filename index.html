@@ -417,8 +417,9 @@
     const viewSignup = document.getElementById('view-signup');
     const otpCard = document.getElementById('otp-verification-card');
 
-    otpCard.classList.add('hidden');
-
+    if (otpCard) {
+  otpCard.classList.add('hidden');
+    }
     if (mode === 'signup') {
       tabSignup.className = "flex-1 py-2.5 text-xs font-bold rounded-xl transition-all duration-200 bg-white text-[#1E3A8A] shadow-sm";
       tabLogin.className = "flex-1 py-2.5 text-xs font-semibold rounded-xl transition-all duration-200 text-slate-500 hover:text-slate-800";
