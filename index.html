@@ -552,14 +552,13 @@ async function handleLoginSubmit() {
   window.location.href = 'student-dashboard.html';
 }
 
-function completeOtpFlow() {
-    
 
-  function completeOtpFlow() {
-    const roleCapitalized = activeRole.charAt(0).toUpperCase() + activeRole.slice(1);
-    alert(`OTP Verified successfully! Redirecting to ${roleCapitalized} Dashboard...`);
-    closeOtpView();
-  }
+function completeOtpFlow() {
+  const roleCapitalized = activeRole.charAt(0).toUpperCase() + activeRole.slice(1);
+  alert(`OTP Verified successfully! Redirecting to ${roleCapitalized} Dashboard...`);
+  closeOtpView();
+}
+    
 </script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
